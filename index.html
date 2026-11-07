@@ -1,0 +1,22 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reels">
+<meta name="theme-color" content="#111418"><title>RiffGym Reels</title>
+<style>body{background:#111418;color:#ece8df;font:17px -apple-system,system-ui,sans-serif;padding:40px 20px;text-align:center}
+a{color:#86c1e6}input{font:inherit;padding:10px;border-radius:9px;border:1px solid #2a3039;background:#0d1014;color:#ece8df;width:100%;max-width:320px}
+button{font:600 16px inherit;padding:11px 18px;border:0;border-radius:10px;background:#86c1e6;margin-top:12px}</style></head>
+<body><p id="msg">Открываю…</p>
+<div id="ask" hidden><p>Ключ доступа (из C:\reelmaker\data\config.json)</p>
+<input id="k" autocomplete="off" autocapitalize="off"><br><button onclick="go(1)">Войти</button></div>
+<script>
+const TARGET = "https://citysearch-kind-cyber-atmospheric.trycloudflare.com";
+function go(save){
+  let k = '';
+  try { if (save) localStorage.setItem('rm_key', document.getElementById('k').value.trim()); k = localStorage.getItem('rm_key') || ''; } catch(e){}
+  if (!k){ document.getElementById('ask').hidden = false; document.getElementById('msg').textContent = 'Первый вход'; return; }
+  location.replace(TARGET + '/#key=' + encodeURIComponent(k));
+}
+go(0);
+</script>
+<noscript><a href="https://citysearch-kind-cyber-atmospheric.trycloudflare.com">Открыть</a></noscript></body></html>
