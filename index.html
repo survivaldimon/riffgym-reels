@@ -10,8 +10,13 @@ button{font:600 16px inherit;padding:11px 18px;border:0;border-radius:10px;backg
 <div id="ask" hidden><p>Ключ доступа (из C:\reelmaker\data\config.json)</p>
 <input id="k" autocomplete="off" autocapitalize="off"><br><button onclick="go(1)">Войти</button></div>
 <script>
-const TARGET = "https://bizarre-hayes-infinite-kid.trycloudflare.com";
-function go(save){
+let TARGET = "https://bizarre-hayes-infinite-kid.trycloudflare.com";
+// GitHub Pages lets browsers cache this page for 10 min: always fetch the current URL fresh
+async function fresh(){
+  try { const r = await fetch('url.json?t=' + Date.now(), {cache: 'no-store'}); TARGET = (await r.json()).url || TARGET; } catch(e){}
+}
+async function go(save){
+  await fresh();
   let k = '';
   try { if (save) localStorage.setItem('rm_key', document.getElementById('k').value.trim()); k = localStorage.getItem('rm_key') || ''; } catch(e){}
   if (!k){ document.getElementById('ask').hidden = false; document.getElementById('msg').textContent = 'Первый вход'; return; }
